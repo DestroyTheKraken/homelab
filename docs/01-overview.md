@@ -1,22 +1,21 @@
 # Lab overview
 
 **Operator:** Joshua Hickman · Omak, WA  
-**Purpose:** Daily practice of Linux administration, edge routing, network segmentation, remote access, and written operations.  
-**Audience:** MSP and internal-IT hiring managers (technician / junior administrator).  
+**Intent:** Practice Linux administration, networking, and IT operations. Seeking employment on an MSP or internal-IT team — not self-employment.  
 **Public site:** none. `destroythekraken.com` is retired. This repo is the portfolio.
 
-The entire premises network is the lab: a wired administration LAN and a wireless home LAN share one VyOS edge. Compute used for study and remote access sits on the wired LAN. Consumer mesh and IoT stay on the wireless LAN.
+The whole premises is the lab. I installed Starlink, built the VyOS edge, expanded NIC count with USB Ethernet adapters, segmented home from lab, split guest and IoT Wi-Fi from the household SSID, and deployed the PCs and clients listed in the inventory.
 
 ## What this lab is for
 
 - Keep a small Linux fleet patched, reachable, and documented
-- Practice dual-account Tailscale: one tailnet per identity, users and clients as first-class objects
-- Reach the lab from operator phone / tablet without opening inbound WAN ports
+- Practice two Tailscale identities (lab vs home) as separate user/client inventories
+- Reach the lab without opening inbound WAN ports (Starlink CGNAT)
 - Write runbooks that match what is actually running
 
 ## What this snapshot is not
 
-This is not a multi-tenant cloud, not a client hosting environment, and not a claim that every platform on a résumé is running on every node today. Pages here describe **what was observed on 2026-08-24**.
+Not a multi-tenant cloud. Not a client-hosting environment. Not an active local-IT business ([dtk](https://github.com/DestroyTheKraken/dtk) was a tooling experiment).
 
 ## Contact
 

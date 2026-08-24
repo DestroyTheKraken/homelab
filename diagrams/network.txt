@@ -1,28 +1,29 @@
-Premises lab — observed 2026-08-24 (no WAN IPs, no MACs)
+Premises lab — observed 2026-08-24 (no WAN IPs, no MACs, no Tailscale addresses)
 
-                    [ Internet / WAN ]
-                            |
-                     +--------------+
-                     | vyos-router  |
-                     | VyOS rolling |
-                     |              |
-                     |  Tailscale   |---- career tailnet (addr omitted)
-                     |  interface   |
-                     +------+-------+
-                            |
-            +---------------+----------------+
-            |                                |
-    192.168.20.0/24                    192.168.10.0/24
-      Lab LAN (wired)                    Home WLAN
-            |                                |
-     .1 gateway                         .1 gateway
-            |                                |
-     .100 um690 ---- dual-homed ---- .150 um690
-     .101 node1                         .100/.108 mesh APs
-     .102 node2                         IoT / operator clients
-     .103 node3                           (not listed)
-     .109 unmanaged
+                         [ Starlink CGNAT ]
+                                 |
+                          eth0 WAN
+                                 |
+                    +------------+------------+
+                    |   vyos-router           |
+                    |   ThinkCentre Tiny      |
+                    |   VyOS rolling          |
+                    |   USB Ethernet adapters |
+                    |   LAN -> WAN only       |
+                    +----+---------------+----+
+                         |               |
+                   eth2 Home       eth3 Lab
+              192.168.10.1/24   192.168.20.1/24
+                         |               |
+              TP-Link Deco X20 x2    lab switch
+              (AP mode, DHCP off)        |
+                         |               |
+           household / guest / IoT   .100 um690 (also Wi-Fi .150)
+           SSIDs                     .101 node1
+                                     .102 node2
+                                     .103 node3
+                                     .109 display
 
-Studio tailnet (destroythekraken@gmail.com)
-  um690, node1, node2, node3, j-phn, j-tab
-  MagicDNS: *.tail13a119.ts.net
+Tailscale — two identities
+  Lab  (destroythekraken@) : um690, node1-3, j-phn, j-tab
+  Home (joshua.hickman1@)  : um690, household Linux/Android, field client

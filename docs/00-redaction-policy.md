@@ -10,7 +10,9 @@ This repository is public. Inventory is written for hiring managers, not for an 
 - MAC addresses, serial numbers, machine-ids, disk serials
 - Street address, phone numbers, family names
 - Google account photo URLs and Tailscale numeric user IDs
-- Guest / IoT hostnames that identify household members
+- Guest / IoT hostnames that identify household members by given name
+- Starlink / WAN CGNAT addresses
+- Raw `config.boot` and DHCP lease dumps
 - Exact Wi-Fi SSIDs and any PSK material
 
 ## Allowed

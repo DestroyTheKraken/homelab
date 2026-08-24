@@ -6,21 +6,20 @@
 
 | Field | Value |
 |-------|--------|
-| Role | Daily operator workstation, Git, docs, local Ollama, Tailscale client |
-| Hardware | Minisforum UM690 (Micro Computer HK) |
+| Role | Daily operator workstation, Git, docs, local models, Tailscale (both identities over time) |
+| Hardware | Minisforum UM690 |
 | CPU | AMD Ryzen 9 6900HX (8c/16t) + Radeon 680M |
 | Memory | 64 GiB |
-| System disk | 1.9 TB NVMe (TEAM), Ubuntu 26.04 LTS, kernel 7.0 |
+| System disk | 1.9 TB NVMe, Ubuntu 26.04 LTS |
 | Lab IPv4 | `192.168.20.100/24` |
 | Home IPv4 | `192.168.10.150/24` |
-| Users | `joshua` (operator) |
-| Notable local services | OpenSSH, Tailscale, Ollama (localhost only) |
+| User | `joshua` |
 
-Removable USB disks attached to this seat are working media, not published inventory.
+Removable USB disks on this seat are working media, not published inventory.
 
-## Cluster nodes — `node1` `node2` `node3`
+## Lab fleet — `node1` `node2` `node3`
 
-Identical small-form-factor desktops on the lab LAN. Used as a repeatable three-node Linux fleet (same image class, SSH + Tailscale).
+Three matching small-form-factor PCs I imaged and keep as a repeatable Ubuntu fleet.
 
 | Field | Value |
 |-------|--------|
@@ -31,20 +30,31 @@ Identical small-form-factor desktops on the lab LAN. Used as a repeatable three-
 | OS | Ubuntu 26.04 LTS |
 | User | `kraken` |
 | Listening (snapshot) | OpenSSH, Tailscale |
-| Uptime at snapshot | ~6 days |
 
-| Host | Lab IPv4 |
-|------|----------|
-| node1 | `192.168.20.101` |
-| node2 | `192.168.20.102` |
-| node3 | `192.168.20.103` |
-
-These three were **not** running extra application daemons at snapshot. They are the fleet to administer, not a hidden hypervisor layer.
+| Host | Lab IPv4 | Note |
+|------|----------|------|
+| node1 | `192.168.20.101` | Worker |
+| node2 | `192.168.20.102` | Worker |
+| node3 | `192.168.20.103` | Worker (this chassis previously had another role; rebuilt into the fleet) |
 
 ## Edge
 
-Documented in [02-network.md](02-network.md). Not a compute node for workloads.
+VyOS on a fourth ThinkCentre Tiny. Not a workload node. See [06-vyos-build.md](06-vyos-build.md).
 
-## Operator clients
+## Other on-site deployments
 
-Android phone (`j-phn`) and tablet (`j-tab`) on the studio tailnet. Used to practice client enrollment and remote reachability. Device identifiers beyond those hostnames are omitted.
+| Class | Where | Notes |
+|-------|--------|--------|
+| Lab display | Lab LAN | Consumer display; not managed as a server |
+| Household Linux seats | Home tailnet | Laptops / extra PCs enrolled as clients |
+| Operator mobiles | Both tailnets at different times | Phone and tablet |
+| Field Android | Home tailnet | Stale enrollment (practice in leaving inventory visible) |
+| IoT / guest | Home SSIDs | Not listed by hostname |
+
+## Software on managed Linux (snapshot)
+
+| Host | Extra services beyond SSH / Tailscale / base OS |
+|------|--------------------------------------------------|
+| um690 | Desktop stack, Ollama on localhost |
+| node1–3 | none observed |
+| vyos-router | Edge routing, DHCP, firewall |
