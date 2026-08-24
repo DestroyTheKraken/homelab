@@ -2,8 +2,6 @@
 
 Redacted spec sheets for the premises network I designed, installed, and operate in Omak, WA.
 
-This is the hiring-manager view of the lab. There is no marketing site. `destroythekraken.com` is retired.
-
 **Job search:** joshua.hickman1@gmail.com  
 **Studio:** destroythekraken@gmail.com  
 **GitHub:** [DestroyTheKraken](https://github.com/DestroyTheKraken)
