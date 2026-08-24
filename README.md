@@ -8,13 +8,13 @@ Redacted spec sheets for the premises network I designed, installed, and operate
 
 ## Who this is for
 
-MSP and internal-IT hiring managers. I want to work **on a team**, not run a solo shop. The lab is how I practice the job: edge routing, segmentation, Linux fleets, remote access, and written operations.
+MSP and internal-IT hiring managers. I want to work **on a team**. This lab is how I practice the job I am applying for — not a k3s or “HA cloud” claim.
 
-## What I built
+## What I actually run and practice
 
-I designed and deployed the whole premises network by hand: Starlink at the property, a custom **VyOS** edge on a Lenovo ThinkCentre Tiny, TP-Link USB Ethernet adapters to get enough NIC ports, a lab switch, and a TP-Link Deco mesh in access-point mode. Home and lab are separate layer-3 networks. Guest and IoT SSIDs are split from the household WLAN. Several PCs and household clients were imaged and enrolled.
+I designed and deployed the premises network: Starlink, a **VyOS** edge (ThinkCentre Tiny + USB Ethernet adapters), a lab switch, and a TP-Link Deco mesh in AP mode. Home and lab are separate. Guest and IoT SSIDs are split from household Wi-Fi. I image Linux and Windows desktops and Ubuntu/Rocky-style servers. I use VirtualBox and Multipass for disposable labs. I live in the CLI (files, packages, systemctl basics) and use default-deny firewall habits (UFW / firewalld basics).
 
-Grok (CLI and web) was used for research and troubleshooting. **Every command on the router and hosts was typed and verified by me.**
+I use **Grok Build** and **Claude Code** to research, draft, and configure **while I learn**. I type the commands, test the result, and write the notes. That is also how I would stand up a more complex stack (for example Kubernetes) if a job required it — not because a k3s cluster is what this lab is today.
 
 ## Lab at a glance (2026-08-24)
 
@@ -63,7 +63,7 @@ Same person, two identities, two device inventories. That is the practice: users
 
 ## Honesty note
 
-These pages are **observed**. If a host was only running SSH and Tailscale that day, that is what the sheet says. Older notes about k3s or a sold service line are not current.
+These pages are **observed**. If a host was only running SSH and Tailscale that day, that is what the sheet says. I do not list k3s, Ceph, or Proxmox as current production here. AI-assisted setup is how I learn; I still operate the box.
 
 ## Redaction
 
