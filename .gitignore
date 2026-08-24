@@ -1,0 +1,14 @@
+# Never commit live dumps or secrets
+*.json
+!docs/examples/*.json.example
+*secret*
+*credential*
+*.pem
+*.key
+id_*
+.env
+.env.*
+tailscale-status*.txt
+ts-*.json
+/tmp/
+.DS_Store

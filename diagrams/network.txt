@@ -1,0 +1,28 @@
+Premises lab — observed 2026-08-24 (no WAN IPs, no MACs)
+
+                    [ Internet / WAN ]
+                            |
+                     +--------------+
+                     | vyos-router  |
+                     | VyOS rolling |
+                     |              |
+                     |  Tailscale   |---- career tailnet (addr omitted)
+                     |  interface   |
+                     +------+-------+
+                            |
+            +---------------+----------------+
+            |                                |
+    192.168.20.0/24                    192.168.10.0/24
+      Lab LAN (wired)                    Home WLAN
+            |                                |
+     .1 gateway                         .1 gateway
+            |                                |
+     .100 um690 ---- dual-homed ---- .150 um690
+     .101 node1                         .100/.108 mesh APs
+     .102 node2                         IoT / operator clients
+     .103 node3                           (not listed)
+     .109 unmanaged
+
+Studio tailnet (destroythekraken@gmail.com)
+  um690, node1, node2, node3, j-phn, j-tab
+  MagicDNS: *.tail13a119.ts.net
