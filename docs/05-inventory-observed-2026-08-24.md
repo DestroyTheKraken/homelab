@@ -24,7 +24,9 @@ Sources: live inspection from `um690`, plus operator-provided `sudo tailscale st
 
 ## Lab Tailscale (destroythekraken@)
 
-`um690`, `node1`, `node2`, `node3`, `operator-phone`, `operator-tablet` — all online.
+Historical for this date: `um690`, `node1`, `node2`, `node3`, `operator-phone`, `operator-tablet` — all online.
+
+**Current lab Tailscale membership/status:** see [05-inventory-observed-2026-08-29.md](05-inventory-observed-2026-08-29.md).
 
 ## Home Tailscale (joshua.hickman1@)
 

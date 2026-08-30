@@ -18,7 +18,7 @@ I designed and deployed the premises network: Starlink, a **VyOS** edge (ThinkCe
 
 I use **Grok Build** and **Claude Code** to research, draft, and configure **while I learn**. I type the commands, test the result, and write the notes. That is also how I would stand up a more complex stack (for example Kubernetes) if a job required it — not because a k3s cluster is what this lab is today.
 
-## Lab at a glance (2026-08-24)
+## Lab at a glance
 
 | Piece | What it is |
 |-------|------------|
@@ -40,6 +40,8 @@ I use **Grok Build** and **Claude Code** to research, draft, and configure **whi
 
 Same person, two identities, two device inventories. That is the practice: users and clients as objects you administer, not one flat VPN. Addresses omitted.
 
+**Lab Tailscale membership (2026-08-29):** `um690`, `node1`, `node2`, `node3`, `operator-phone` (active), `operator-tablet` (offline ~4 days). Details in [docs/04-tailscale.md](docs/04-tailscale.md).
+
 ## Spec sheets
 
 | Doc | Contents |
@@ -49,7 +51,8 @@ Same person, two identities, two device inventories. That is the practice: users
 | [docs/02-network.md](docs/02-network.md) | Edge, segments, isolation |
 | [docs/03-compute.md](docs/03-compute.md) | Hosts and PC deployments |
 | [docs/04-tailscale.md](docs/04-tailscale.md) | Both tailnets (redacted) |
-| [docs/05-inventory-observed-2026-08-24.md](docs/05-inventory-observed-2026-08-24.md) | Dated snapshot |
+| [docs/05-inventory-observed-2026-08-29.md](docs/05-inventory-observed-2026-08-29.md) | Current dated snapshot (lab Tailscale refreshed) |
+| [docs/05-inventory-observed-2026-08-24.md](docs/05-inventory-observed-2026-08-24.md) | Prior snapshot (includes last home Tailscale capture) |
 | [docs/06-vyos-build.md](docs/06-vyos-build.md) | How the router was built |
 | [diagrams/network.txt](diagrams/network.txt) | ASCII topology |
 

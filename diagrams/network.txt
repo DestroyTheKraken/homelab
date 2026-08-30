@@ -1,4 +1,5 @@
-Premises lab — observed 2026-08-24 (no WAN IPs, no MACs, no Tailscale addresses)
+Premises lab — LAN observed 2026-08-24; lab Tailscale refreshed 2026-08-29
+(no WAN IPs, no MACs, no Tailscale addresses)
 
                          [ Starlink CGNAT ]
                                  |
@@ -25,5 +26,6 @@ Premises lab — observed 2026-08-24 (no WAN IPs, no MACs, no Tailscale addresse
                                      .109 display
 
 Tailscale — two identities
-  Lab  (destroythekraken@) : um690, node1-3, j-phn, j-tab
+  Lab  (destroythekraken@) : um690, node1-3, operator-phone (active), operator-tablet (offline ~4d)
   Home (joshua.hickman1@)  : um690, household Linux/Android, field client
+                             (home snapshot last dated 2026-08-24)

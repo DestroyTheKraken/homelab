@@ -11,26 +11,26 @@ Two Google-backed tailnets, on purpose:
 
 Same operator, two tenancies. That is the skill: enroll, name, and review clients the way a shop keeps customer environments apart.
 
-Addresses, relays, and numeric user IDs are omitted.
+Addresses, relays, direct endpoints, and numeric user IDs are omitted. Published hostnames for mobiles use **role names** (not household nicknames).
 
-## Lab tailnet — 2026-08-24
+## Lab tailnet — 2026-08-29
 
-Captured on `um690` (`sudo tailscale status`). All six were online.
+Captured on `um690` (`sudo tailscale status`). Owner on every row: `destroythekraken@`.
 
-| Hostname | OS | Role |
-|----------|-----|------|
-| um690 | linux | Control seat |
-| node1 | linux | Lab fleet |
-| node2 | linux | Lab fleet |
-| node3 | linux | Lab fleet |
-| operator-phone | android | Operator phone |
-| operator-tablet | android | Operator tablet |
+| Hostname (published) | OS | Status |
+|----------------------|-----|--------|
+| um690 | linux | idle / reachable |
+| node1 | linux | idle / reachable |
+| node2 | linux | idle / reachable |
+| node3 | linux | idle / reachable |
+| operator-phone | android | active (direct path) |
+| operator-tablet | android | offline, last seen ~4 days |
 
-No ACL tags and no advertised subnet routes at snapshot. SSH to the Linux nodes also works via MagicDNS host aliases.
+Membership is exactly those six devices. No ACL tags and no advertised subnet routes at snapshot. SSH to the Linux nodes also works via MagicDNS host aliases.
 
 ## Home tailnet — 2026-08-24
 
-Captured on `um690` after switching profiles. IPs omitted.
+Captured earlier on `um690` after switching profiles. IPs omitted. Not re-captured on 2026-08-29.
 
 | Hostname | OS | Role | Status |
 |----------|-----|------|--------|
