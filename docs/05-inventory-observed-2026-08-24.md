@@ -24,12 +24,12 @@ Sources: live inspection from `um690`, plus operator-provided `sudo tailscale st
 
 ## Lab Tailscale (destroythekraken@)
 
-`um690`, `node1`, `node2`, `node3`, `j-phn`, `j-tab` — all online.
+`um690`, `node1`, `node2`, `node3`, `operator-phone`, `operator-tablet` — all online.
 
 ## Home Tailscale (joshua.hickman1@)
 
-Online: `um690`, `a-lap`, `pookie`.  
-Offline: `hickles`, `a-phn`, `j-phn`, `j-tab`, `dtk-field`.
+Online: `um690`, `home-laptop-1`, `home-desktop-1`.  
+Offline: `home-desktop-2`, `home-phone-1`, `operator-phone`, `operator-tablet`, `field-android`.
 
 ## How to refresh
 

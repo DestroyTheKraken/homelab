@@ -1,14 +1,16 @@
 # Homelab
 
-Redacted spec sheets for the premises network I designed, installed, and operate in Omak, WA.
+Redacted premises lab spec sheets: **VyOS**, segmented LANs, Ubuntu fleet, dual Tailscale tenancy.
 
-**Job search:** joshua.hickman1@gmail.com  
-**Studio:** destroythekraken@gmail.com  
-**GitHub:** [DestroyTheKraken](https://github.com/DestroyTheKraken)
+**What this is not:** a Kubernetes / HA private-cloud résumé. It is a working premises network plus dated, redacted notes.
+
+**Job search:** joshua.hickman1@gmail.com · **Lab identity (Tailscale):** destroythekraken@gmail.com · **GitHub:** [DestroyTheKraken](https://github.com/DestroyTheKraken)
 
 ## Who this is for
 
-MSP and internal-IT hiring managers. I want to work **on a team**. This lab is how I practice the job I am applying for — not a k3s or “HA cloud” claim.
+MSP and internal-IT hiring managers. I want to work **on a team**. This lab is how I practice the job I am applying for.
+
+**Read in order:** [docs/00-redaction-policy.md](docs/00-redaction-policy.md) first, then `01` → `06`.
 
 ## What I actually run and practice
 

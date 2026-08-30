@@ -12,3 +12,12 @@ tailscale-status*.txt
 ts-*.json
 /tmp/
 .DS_Store
+
+# --- secrets / inventory dumps ---
+.env
+*.pem
+id_rsa*
+*.key
+tailscale-status.json
+**/*secret*
+**/*credential*

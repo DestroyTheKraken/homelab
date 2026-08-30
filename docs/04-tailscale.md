@@ -23,8 +23,8 @@ Captured on `um690` (`sudo tailscale status`). All six were online.
 | node1 | linux | Lab fleet |
 | node2 | linux | Lab fleet |
 | node3 | linux | Lab fleet |
-| j-phn | android | Operator phone |
-| j-tab | android | Operator tablet |
+| operator-phone | android | Operator phone |
+| operator-tablet | android | Operator tablet |
 
 No ACL tags and no advertised subnet routes at snapshot. SSH to the Linux nodes also works via MagicDNS host aliases.
 
@@ -35,13 +35,13 @@ Captured on `um690` after switching profiles. IPs omitted.
 | Hostname | OS | Role | Status |
 |----------|-----|------|--------|
 | um690 | linux | Control seat (also on lab tailnet) | online |
-| a-lap | linux | Household laptop | online |
-| pookie | linux | Household Linux seat | online |
-| hickles | linux | Household Linux seat | offline (~3 days) |
-| a-phn | android | Household phone | offline (~16 hours) |
-| j-phn | android | Operator phone (home enrollment) | offline (~10 days) |
-| j-tab | android | Operator tablet (home enrollment) | offline (~8 days) |
-| dtk-field | android | Field client | offline (~50 days) |
+| home-laptop-1 | linux | Household laptop | online |
+| home-desktop-1 | linux | Household Linux seat | online |
+| home-desktop-2 | linux | Household Linux seat | offline (~3 days) |
+| home-phone-1 | android | Household phone | offline (~16 hours) |
+| operator-phone | android | Operator phone (home enrollment) | offline (~10 days) |
+| operator-tablet | android | Operator tablet (home enrollment) | offline (~8 days) |
+| field-android | android | Field client | offline (~50 days) |
 
 `um690` appears on **both** tailnets. That is intentional: the control seat is the operator workstation for each identity. The stale field client is left on the list so inventory review stays honest.
 
