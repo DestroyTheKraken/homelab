@@ -21,3 +21,10 @@ id_rsa*
 tailscale-status.json
 **/*secret*
 **/*credential*
+
+.admin/
+
+# Nested leaf git repos (own remotes — never add into homelab.git)
+# See ~/Projects/REPOS.md
+/hickMedia/
+/installers/

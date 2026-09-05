@@ -2,6 +2,8 @@
 
 Redacted premises lab spec sheets: **VyOS**, segmented LANs, Ubuntu fleet, dual Tailscale tenancy.
 
+**Projects layout:** [`../README.md`](../README.md) (naming/ownership) · [`../DESIGN.md`](../DESIGN.md) (migration decisions) · [`AGENTS.md`](./AGENTS.md).  
+This bucket owns premises infra, the **HickMedia** lab appliance (`hickMedia/`; convenience link `~/HickMedia`), and the **DTK family platform daily workspace** (`dtkPlatform/`). DTK (`site/` only) may point at lab work for branding — it does not own a second copy.
 **What this is not:** a Kubernetes / HA private-cloud résumé. It is a working premises network plus dated, redacted notes.
 
 **Job search:** joshua.hickman1@gmail.com · **Lab identity (Tailscale):** destroythekraken@gmail.com · **GitHub:** [DestroyTheKraken](https://github.com/DestroyTheKraken)
@@ -41,6 +43,12 @@ I use **Grok Build** and **Claude Code** to research, draft, and configure **whi
 Same person, two identities, two device inventories. That is the practice: users and clients as objects you administer, not one flat VPN. Addresses omitted.
 
 **Lab Tailscale membership (2026-08-29):** `um690`, `node1`, `node2`, `node3`, `operator-phone` (active), `operator-tablet` (offline ~4 days). Details in [docs/04-tailscale.md](docs/04-tailscale.md).
+
+## Platform daily workspace
+
+| Path | Role |
+|------|------|
+| [dtkPlatform/](./dtkPlatform/) | Sessions, Portainer/Tailscale guides, active Compose, Phase checklist (Grok Build cwd) |
 
 ## Spec sheets
 
