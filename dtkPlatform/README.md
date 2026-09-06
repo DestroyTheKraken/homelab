@@ -4,17 +4,20 @@ Phased **DestroyTheKraken family home platform** work on LabNet (Tailscale Free 
 
 **Bucket:** `HOME_LAB`. Layout rules: [`../../README.md`](../../README.md). Remotes map: [`../../REPOS.md`](../../REPOS.md).
 
+**Separation:** This is the **platform you install**. The **AIDE_OS UI** you use to get daily guides/lessons while installing is a different MVP under `Projects/AIDE/`. See [`../../AIDE/WORKFLOW-SEPARATION.md`](../../AIDE/WORKFLOW-SEPARATION.md).
+
 ## Read first
 
 | Doc | What it is |
 |-----|------------|
-| [`PLAN.md`](./PLAN.md) | **Multiphase project only** (Phases 0–5). Not daily ops. |
+| [`PLAN.md`](./PLAN.md) | **Multiphase project only** (Phases 0–5). Not AIDE UI. Not daily ops methodology. |
 | [`checklist.md`](./checklist.md) | Living phase checkboxes |
 | [`AGENTS.md`](./AGENTS.md) | Scope rules for agents working in this folder |
 
-## Not designed yet (on purpose)
+## Not designed in *this* tree (on purpose)
 
-Homelab-wide **start / stop / review** procedures and any daily session coach after the phased build completes are **out of scope**. Do not invent them here. Design that in a separate pass when you want it.
+- AIDE_OS content delivery / lesson management UI → build under **AIDE** with Grok Build  
+- Homelab-wide start / stop / review procedures → separate design later  
 
 ## Layout
 

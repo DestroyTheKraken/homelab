@@ -10,7 +10,7 @@
 | `docs/`, `diagrams/` | Redacted premises network / Tailscale inventory (public-safe) |
 | `hickMedia/` | Living-room / media appliance lab tree (canonical) |
 | `installers/` | Lab installers (nc-lin-cs, ssh-ufw-ts, …) |
-| **`dtkPlatform/`** | Daily Platform Agent workspace: sessions, GUI guides, active Compose, family-platform checklist |
+| **`dtkPlatform/`** | HomeLab / DTK **platform build** (phases, Compose, guides). Not the AIDE_OS lesson UI. |
 
 ## Do
 
