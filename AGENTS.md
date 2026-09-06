@@ -19,9 +19,13 @@
 - Keep redaction rules in `docs/00-redaction-policy.md`.
 - Cross-link to `AIDE/` for LFCS study — do not fork curricula here.
 
+## Separation
+
+HomeLab services ≠ AIDE_OS content delivery UI. See [`../AIDE/WORKFLOW-SEPARATION.md`](../AIDE/WORKFLOW-SEPARATION.md).
+
 ## Do not
 
 - Put public website pages here (those belong in `DTK/site/` only).
-- Put LFCS lesson product work here (those belong in `AIDE/`).
+- Put LFCS lesson product / Student ticket UI here (those belong in `AIDE/`).
 - Claim k3s/Ceph/Proxmox as current production in inventory docs unless observed.
 - Duplicate HickMedia trees under DTK.
