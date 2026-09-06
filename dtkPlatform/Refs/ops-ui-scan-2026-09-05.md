@@ -74,3 +74,11 @@ That is a **PIM-based ticket system**, not Jira — appropriate until you design
 1. Is a “ticket” an **email**, a **calendar to-do**, a **git issue**, or all three?  
 2. Who receives tickets — only you, or family?  
 3. Must progress sync to Google Calendar, or is local Akonadi enough?
+
+## Related AIDE research (ticket delivery / daily guides)
+
+BraveResearch + NetworkAIDE synthesis (Zammad, inbox levels, AIDE_OS UX):
+
+`~/Projects/AIDE/aideTutor/Refs/ticket-delivery-from-brave-research.md`
+
+Primary BraveResearch source: `~/Documents/BraveResearch/sysadmin-helpdesk-aideTutor.md`
