@@ -30,3 +30,16 @@ Canon: [`../../AIDE/WORKFLOW-SEPARATION.md`](../../AIDE/WORKFLOW-SEPARATION.md).
 - Reinstall or wipe node1–node3. Proxmox is already there.
 - Document phones, tablets, laptops, or HickmaNet in this tree.
 - `git add` nested `hickMedia/` or `installers/` from the parent `HOME_LAB` repo.
+
+## Phase sessions
+
+Each directory under `phases/` has its own `AGENTS.md`. Grok loads rules from the directory where the session starts, so a session must be started inside the phase.
+
+```bash
+cd ~/Projects/HOME_LAB/dtkPlatform/phases/02-open-webui
+grok
+```
+
+Joshua says: Begin this phase
+
+That file tells Grok to read the plan, the checklist, and this phase, then give one guided step. Joshua runs host commands. Grok writes files in this tree. The next phase is a new session.

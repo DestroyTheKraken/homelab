@@ -8,11 +8,14 @@ Each directory is one session. Finish it before opening the next.
 
 ```bash
 cd ~/Projects/HOME_LAB/dtkPlatform/phases/02-open-webui
+grok
 ```
 
-Then tell Grok: review the last completed phase, and if it is complete, begin this phase.
+Say: Begin this phase
 
-Grok reads the previous phase README, checks the exit items against the machines, and only then does the work in the current README.
+The first launch in that folder asks you to trust it. Accept that prompt. Until you do, `AGENTS.md` stays unloaded.
+
+Grok reads this phase, the checklist, and the previous phase. It says what is already done, then gives one guided step and who does it. You run the commands on the machines. Grok writes the files in this tree. A finished phase stops. The next phase is a new session.
 
 ## How a session ends
 

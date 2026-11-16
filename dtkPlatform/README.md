@@ -15,6 +15,7 @@ Phased **DestroyTheKraken** private platform on LabNet. Proxmox VE is installed 
 | [`checklist.md`](./checklist.md) | Living phase checkboxes |
 | [`PREP-proxmox.md`](./PREP-proxmox.md) | Cluster is up. Monitoring guests are not. |
 | [`AGENTS.md`](./AGENTS.md) | Scope rules for agents working in this folder |
+| [`phases/`](./phases/README.md) | Start a phase with `grok`, then say: Begin this phase |
 
 ## Not designed in *this* tree (on purpose)
 
