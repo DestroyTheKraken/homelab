@@ -1,5 +1,5 @@
-Premises lab — LAN observed 2026-08-24; lab Tailscale refreshed 2026-08-29
-(no WAN IPs, no MACs, no Tailscale addresses)
+LabNet — Proxmox UI observed 2026-11-15
+DestroyTheKraken tailnet only. No personal endpoints. No WAN IPs, MACs, or Tailscale addresses.
 
                          [ Starlink CGNAT ]
                                  |
@@ -7,25 +7,29 @@ Premises lab — LAN observed 2026-08-24; lab Tailscale refreshed 2026-08-29
                                  |
                     +------------+------------+
                     |   vyos-router           |
-                    |   ThinkCentre Tiny      |
-                    |   VyOS rolling          |
-                    |   USB Ethernet adapters |
-                    |   LAN -> WAN only       |
-                    +----+---------------+----+
-                         |               |
-                   eth2 Home       eth3 Lab
-              192.168.10.1/24   192.168.20.1/24
-                         |               |
-              TP-Link Deco X20 x2    lab switch
-              (AP mode, DHCP off)        |
-                         |               |
-           household / guest / IoT   .100 um690 (also Wi-Fi .150)
-           SSIDs                     .101 node1
-                                     .102 node2
-                                     .103 node3
-                                     .109 display
+                    |   ThinkCentre M93p      |
+                    |   BIOS FBKTE0AUS        |
+                    |   VyOS 2026.06 rolling  |
+                    |   Not a Proxmox target  |
+                    +------------+------------+
+                                 |
+                           eth3 LabNet
+                         192.168.20.1/24
+                                 |
+                            lab switch
+                                 |
+                     .100 um690   control seat (Ubuntu, on the DTK tailnet)
+                     .101 n1      Proxmox node, cluster vote 1
+                     .102 n2      Proxmox node, cluster vote 1
+                     .103 n3      Proxmox node, cluster vote 1
 
-Tailscale — two identities
-  Lab  (destroythekraken@) : um690, node1-3, operator-phone (active), operator-tablet (offline ~4d)
-  Home (joshua.hickman1@)  : um690, household Linux/Android, field client
-                             (home snapshot last dated 2026-08-24)
+              datacenter / cluster name: dtk-cloud
+              quorate, 3 of 3 online, 0 guests
+              web UI :8006, LabNet SSH as root from um690
+
+A second VyOS inside interface (192.168.10.0/24) exists for premises
+separation. Its clients are not part of this diagram.
+
+DTK tailnet (2026-11-15): um690, plus n1 n2 n3 as tag:ops.
+MagicDNS names: n1.tail13a119.ts.net (and n2, n3).
+Nodes do not use Tailscale DNS. LabNet SSH still works.

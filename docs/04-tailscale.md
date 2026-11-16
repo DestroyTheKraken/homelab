@@ -1,53 +1,28 @@
-# Tailscale practice
+# Tailscale — DestroyTheKraken
 
-Tailscale is how this lab practices **identity, client inventory, and remote access**. It is not a substitute for the LAN, and it is not a WAN port-forward.
+Tailscale is how this lab reaches LabNet without an inbound WAN port-forward. It is not a substitute for the LAN.
 
-Two Google-backed tailnets, on purpose:
+This repo records one tailnet: **DestroyTheKraken (DTK)**, login `destroythekraken@gmail.com`. Other tailnets are private and are not documented here. Non-lab devices on DTK are omitted on purpose.
 
-| Name I use | Login | Attached to |
-|------------|-------|-------------|
-| Destroy the Kraken (lab) | destroythekraken@gmail.com | Lab LAN / cluster |
-| HickmaNet (home) | joshua.hickman1@gmail.com | Home LAN / household clients |
+Addresses, relays, direct endpoints, and numeric user IDs are omitted.
 
-Same operator, two tenancies. That is the skill: enroll, name, and review clients the way a shop keeps customer environments apart.
+## DTK tailnet — lab hosts observed 2026-11-15
 
-Addresses, relays, direct endpoints, and numeric user IDs are omitted. Published hostnames for mobiles use **role names** (not household nicknames).
+Captured on `um690` with `tailscale status`, then checked on the cluster over LabNet SSH. Only lab machines are listed.
 
-## Lab tailnet — 2026-08-29
+| Hostname | OS | Status |
+|----------|-----|--------|
+| um690 | linux | Logged into `destroythekraken@gmail.com`. MagicDNS suffix `tail13a119.ts.net`. |
+| n1, n2, n3 | linux | Enrolled the same day. Each is `tag:ops` and online. MagicDNS is off on the nodes so Proxmox keeps its own resolver (`1.1.1.1`). |
 
-Captured on `um690` (`sudo tailscale status`). Owner on every row: `destroythekraken@`.
+LabNet SSH works as `ssh node1`, `ssh node2`, and `ssh node3`. Tailnet SSH works as `ssh node1-ts`, `ssh node2-ts`, and `ssh node3-ts`, which resolve to `n1.tail13a119.ts.net` and the matching names for n2 and n3.
 
-| Hostname (published) | OS | Status |
-|----------------------|-----|--------|
-| um690 | linux | idle / reachable |
-| node1 | linux | idle / reachable |
-| node2 | linux | idle / reachable |
-| node3 | linux | idle / reachable |
-| operator-phone | android | active (direct path) |
-| operator-tablet | android | offline, last seen ~4 days |
+The 2026-11-09 read showed `node1`–`node3` as tagged devices on the Ubuntu install. Those enrollments were replaced by this Proxmox enrollment.
 
-Membership is exactly those six devices. No ACL tags and no advertised subnet routes at snapshot. SSH to the Linux nodes also works via MagicDNS host aliases.
-
-## Home tailnet — 2026-08-24
-
-Captured earlier on `um690` after switching profiles. IPs omitted. Not re-captured on 2026-08-29.
-
-| Hostname | OS | Role | Status |
-|----------|-----|------|--------|
-| um690 | linux | Control seat (also on lab tailnet) | online |
-| home-laptop-1 | linux | Household laptop | online |
-| home-desktop-1 | linux | Household Linux seat | online |
-| home-desktop-2 | linux | Household Linux seat | offline (~3 days) |
-| home-phone-1 | android | Household phone | offline (~16 hours) |
-| operator-phone | android | Operator phone (home enrollment) | offline (~10 days) |
-| operator-tablet | android | Operator tablet (home enrollment) | offline (~8 days) |
-| field-android | android | Field client | offline (~50 days) |
-
-`um690` appears on **both** tailnets. That is intentional: the control seat is the operator workstation for each identity. The stale field client is left on the list so inventory review stays honest.
+`vyos-router` was not in the 2026-11-15 status output.
 
 ## What this demonstrates
 
-1. Enroll Linux servers and Android clients under a named user
-2. Keep home devices off the lab tailnet and lab nodes off the home tailnet (except the dual-homed control seat)
+1. Keep the portfolio tailnet limited to lab machines
+2. Use device tags on the workers and a user identity on the control seat
 3. Reach the lab without inbound WAN ports under Starlink CGNAT
-4. Read a status table and know who owns what, including offline clients

@@ -1,9 +1,9 @@
 # Homelab
 
-Redacted premises lab spec sheets: **VyOS**, segmented LANs, Ubuntu fleet, dual Tailscale tenancy.
+Redacted LabNet spec sheets: **VyOS** edge, **Proxmox VE** on `node1`–`node3`, DestroyTheKraken tailnet for portfolio remote access.
 
 **Projects layout:** [`../README.md`](../README.md) (naming/ownership) · [`../DESIGN.md`](../DESIGN.md) (migration decisions) · [`AGENTS.md`](./AGENTS.md).  
-This bucket owns premises infra, the **HickMedia** lab appliance (`hickMedia/`; convenience link `~/HickMedia`), and the **DTK family platform daily workspace** (`dtkPlatform/`). DTK (`site/` only) may point at lab work for branding — it does not own a second copy.
+This bucket owns premises infra and the **DTK family platform daily workspace** (`dtkPlatform/`). The HickMedia appliance is closed. Its files are in `../Batocera/history-20261025-011510.tar.gz`. There is no `hickMedia/` folder here.
 **What this is not:** a Kubernetes / HA private-cloud résumé. It is a working premises network plus dated, redacted notes.
 
 **Job search:** joshua.hickman1@gmail.com · **Lab identity (Tailscale):** destroythekraken@gmail.com · **GitHub:** [DestroyTheKraken](https://github.com/DestroyTheKraken)
@@ -16,7 +16,7 @@ MSP and internal-IT hiring managers. I want to work **on a team**. This lab is h
 
 ## What I actually run and practice
 
-I designed and deployed the premises network: Starlink, a **VyOS** edge (ThinkCentre Tiny + USB Ethernet adapters), a lab switch, and a TP-Link Deco mesh in AP mode. Home and lab are separate. Guest and IoT SSIDs are split from household Wi-Fi. I image Linux and Windows desktops and Ubuntu/Rocky-style servers. I use VirtualBox and Multipass for disposable labs. I live in the CLI (files, packages, systemctl basics) and use default-deny firewall habits (UFW / firewalld basics).
+I designed and deployed the premises edge: Starlink, a **VyOS** router (ThinkCentre Tiny + USB Ethernet adapters), and a lab switch. LabNet is the network this portfolio documents. I image Linux servers, use Multipass for disposable labs, live in the CLI, and use default-deny firewall habits.
 
 I use **Grok Build** and **Claude Code** to research, draft, and configure **while I learn**. I type the commands, test the result, and write the notes. That is also how I would stand up a more complex stack (for example Kubernetes) if a job required it — not because a k3s cluster is what this lab is today.
 
@@ -26,23 +26,19 @@ I use **Grok Build** and **Claude Code** to research, draft, and configure **whi
 |-------|------------|
 | WAN | Starlink (CGNAT — no inbound port-forwards) |
 | Edge | VyOS rolling on a ThinkCentre M93p Tiny |
-| Lab LAN | `192.168.20.0/24` wired — control seat + three Ubuntu nodes + display |
-| Home WLAN | `192.168.10.0/24` — Deco APs; household, guest, and IoT SSIDs |
-| Isolation | Lab hosts cannot reach home hosts; both can reach the internet |
-| Control seat | `um690` — Minisforum UM690, Ryzen 9 6900HX, 64 GiB, Ubuntu 26.04 |
-| Fleet | `node1`–`node3` — ThinkCentre M93p, Ubuntu 26.04, SSH + Tailscale |
-| Remote access | Two Tailscale tailnets (lab identity vs home identity) |
+| Lab LAN | `192.168.20.0/24` wired — control seat + three workers |
+| Isolation | LabNet is the documented segment. The other inside LAN is not inventoried here. |
+| Control seat | `um690` — Minisforum UM690, Ryzen 9 6900HX, 64 GiB, Ubuntu 26.04.1. Not a Proxmox target. |
+| Fleet | Cluster `dtk-cloud`: n1–n3, Proxmox VE 9.2.26, quorate, 0 guests. Prometheus and Grafana are not installed. |
+| Remote access | DestroyTheKraken tailnet. `um690` plus n1–n3 as `tag:ops`. |
 
-## Two Tailscale tenancies
+## Tailnet
 
-| Tailnet | Login | Role |
-|---------|-------|------|
-| Lab (Destroy the Kraken) | destroythekraken@gmail.com | Cluster + operator mobiles |
-| Home (HickmaNet) | joshua.hickman1@gmail.com | Household and field clients |
+| Tailnet | Login | What this repo lists |
+|---------|-------|----------------------|
+| DestroyTheKraken | destroythekraken@gmail.com | `um690`, `n1`, `n2`, `n3` |
 
-Same person, two identities, two device inventories. That is the practice: users and clients as objects you administer, not one flat VPN. Addresses omitted.
-
-**Lab Tailscale membership (2026-08-29):** `um690`, `node1`, `node2`, `node3`, `operator-phone` (active), `operator-tablet` (offline ~4 days). Details in [docs/04-tailscale.md](docs/04-tailscale.md).
+**Membership (2026-11-15):** those four lab hosts are online. n1–n3 are `tag:ops`. Details in [docs/04-tailscale.md](docs/04-tailscale.md). Other devices on that tailnet are omitted.
 
 ## Platform daily workspace
 
@@ -58,9 +54,11 @@ Same person, two identities, two device inventories. That is the practice: users
 | [docs/01-overview.md](docs/01-overview.md) | Purpose and contact |
 | [docs/02-network.md](docs/02-network.md) | Edge, segments, isolation |
 | [docs/03-compute.md](docs/03-compute.md) | Hosts and PC deployments |
-| [docs/04-tailscale.md](docs/04-tailscale.md) | Both tailnets (redacted) |
-| [docs/05-inventory-observed-2026-08-29.md](docs/05-inventory-observed-2026-08-29.md) | Current dated snapshot (lab Tailscale refreshed) |
-| [docs/05-inventory-observed-2026-08-24.md](docs/05-inventory-observed-2026-08-24.md) | Prior snapshot (includes last home Tailscale capture) |
+| [docs/04-tailscale.md](docs/04-tailscale.md) | DTK tailnet, lab hosts only |
+| [docs/05-inventory-observed-2026-11-15.md](docs/05-inventory-observed-2026-11-15.md) | Current snapshot: cluster `dtk-cloud`, LabNet SSH, `tag:ops` |
+| [docs/05-inventory-observed-2026-11-09.md](docs/05-inventory-observed-2026-11-09.md) | Prior snapshot (Ubuntu workers) |
+| [docs/05-inventory-observed-2026-08-29.md](docs/05-inventory-observed-2026-08-29.md) | Prior snapshot |
+| [docs/05-inventory-observed-2026-08-24.md](docs/05-inventory-observed-2026-08-24.md) | Prior snapshot |
 | [docs/06-vyos-build.md](docs/06-vyos-build.md) | How the router was built |
 | [diagrams/network.txt](diagrams/network.txt) | ASCII topology |
 
@@ -76,7 +74,7 @@ Same person, two identities, two device inventories. That is the practice: users
 
 ## Honesty note
 
-These pages are **observed**. If a host was only running SSH and Tailscale that day, that is what the sheet says. I do not list k3s, Ceph, or Proxmox as current production here. AI-assisted setup is how I learn; I still operate the box.
+These pages are **observed**. Proxmox is listed because the web UI answered on node1–node3 on 2026-11-15. k3s and Ceph are not listed. AI-assisted setup is how I learn; I still operate the box.
 
 ## Redaction
 

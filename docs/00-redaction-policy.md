@@ -2,6 +2,18 @@
 
 This repository is public. Inventory is written for hiring managers, not for an attacker recon dump.
 
+## Scope of this repo
+
+`HOME_LAB` documents **LabNet** and the **DestroyTheKraken (DTK)** tailnet only. That tailnet is the learning and portfolio network.
+
+Out of scope, and not inventoried here:
+
+- Phones, tablets, and laptops
+- HickmaNet and any other personal tailnet
+- Household, guest, and IoT clients on the premises LAN that is not LabNet
+
+The VyOS box has a second inside interface for that other LAN. The interface may be named as an edge fact. Clients on it are not listed.
+
 ## Always omit
 
 - Passwords, tokens, API keys, Tailscale auth keys, SSH private keys

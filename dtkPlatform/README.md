@@ -1,6 +1,6 @@
 # dtkPlatform
 
-Phased **DestroyTheKraken family home platform** work on LabNet (Tailscale Free · Docker/Portainer · one service at a time).
+Phased **DestroyTheKraken** private platform on LabNet. Proxmox VE is installed on node1–node3. See [`PREP-proxmox.md`](./PREP-proxmox.md). The service plan is [`PLAN.md`](./PLAN.md).
 
 **Bucket:** `HOME_LAB`. Layout rules: [`../../README.md`](../../README.md). Remotes map: [`../../REPOS.md`](../../REPOS.md).
 
@@ -10,8 +10,10 @@ Phased **DestroyTheKraken family home platform** work on LabNet (Tailscale Free 
 
 | Doc | What it is |
 |-----|------------|
-| [`PLAN.md`](./PLAN.md) | **Multiphase project only** (Phases 0–5). Not AIDE UI. Not daily ops methodology. |
+| [`PLAN.md`](./PLAN.md) | MVP roles and end state. |
+| [`phases/`](./phases/README.md) | One directory per session, 00 through 11. |
 | [`checklist.md`](./checklist.md) | Living phase checkboxes |
+| [`PREP-proxmox.md`](./PREP-proxmox.md) | Cluster is up. Monitoring guests are not. |
 | [`AGENTS.md`](./AGENTS.md) | Scope rules for agents working in this folder |
 
 ## Not designed in *this* tree (on purpose)
@@ -23,9 +25,11 @@ Phased **DestroyTheKraken family home platform** work on LabNet (Tailscale Free 
 
 ```text
 dtkPlatform/
-├── PLAN.md           # multiphase install plan
+├── PLAN.md           # MVP roles and end state
+├── phases/           # session directories 00–11
+├── PREP-proxmox.md   # cluster dtk-cloud is up; monitoring guests are not
 ├── checklist.md
-├── Compose/          # active stack files (origin: hickMedia templates)
+├── Compose/          # stack files for the current MVP
 ├── Guides/           # optional click-path aids for a phase
 ├── Sessions/         # optional dated notes (not an ops system)
 ├── Progress/         # optional current-phase pointer
@@ -38,6 +42,6 @@ dtkPlatform/
 | Path | Role |
 |------|------|
 | [`../docs/`](../docs/) | Redacted network SoT → remote `homelab` |
-| [`../hickMedia/`](../hickMedia/) | Appliance/lab tree → remote `HickMedia` |
+| HickMedia | Closed. Archive is `../Batocera/history-20261025-011510.tar.gz`. Do not unpack it here. |
 | [`../installers/`](../installers/) | nc-lin-cs, ssh-ufw-ts → own remotes |
 | `AIDE/aideTutor` | LFCS outline (study lane) |

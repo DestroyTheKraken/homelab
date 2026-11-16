@@ -1,42 +1,72 @@
-# Phase checklist — DTK home platform
+# Phase checklist — DTK private platform
 
-Multiphase project only. Not an ops runbook.
+MVP sessions live in [`phases/`](./phases/README.md). Proxmox VE is installed on node1–node3 (observed 2026-11-15).
 
-## Phase 0 — Access foundation
+## 00 — Planning
 
-- [ ] Confirm lab tailnet `tail13a119.ts.net` on um690 + node1–3
-- [ ] Apply ACL grants + tags (`PLAN.md` §5) via Tailscale admin GUI
-- [ ] UFW baseline on workers
-- [ ] Exit: ops SSH yes · family-like SSH no · Portainer not for family
+- [x] Roles and end state in `PLAN.md` (2026-11-15)
+- [x] Phase directories 01–11 written
+- [x] Old media server removed from current platform docs
 
-## Phase 1 — Watch + Listen (Jellyfin)
+## 01 — Access
 
-- [ ] Docker Engine on node1
-- [ ] Portainer CE (ops-only)
-- [ ] Deploy `Compose/jellyfin-compose.yml` via Portainer
-- [ ] Tiny media test library
-- [ ] Family Jellyfin users
-- [ ] Phone streams over MagicDNS
+- [x] SSH from um690 to node1, node2, node3 (LabNet and DTK MagicDNS, as `root`)
+- [x] `phases/01-access/inventory.md` written (2026-11-15)
+- [x] Ollama still localhost-only (`127.0.0.1:11434`)
+- [x] VyOS untouched
 
-## Phase 2 — Home portal
+## 02 — Open WebUI
 
-- [ ] Static five-tile page
-- [ ] Reachable over Tailscale
+- [ ] Tailnet login, one model reply, one Whisper dictation
+- [ ] Port 11434 still on localhost only
 
-## Phase 3 — Nextcloud
+## 03 — Kodi
 
-- [ ] Choose Option A (existing Core) or B (node2)
-- [ ] Family accounts + photo test
+- [ ] Kodi plays a file from `/srv/nas_a/kodi/Movies`
+- [ ] A second tailnet Kodi sees the same library entry
+- [ ] Historical media server on node1 stopped and disabled
 
-## Phase 4 — Play (RetroArch)
+## 04 — Steam
 
-- [ ] Deferred until Phases 0–3 exit
+- [ ] Big Picture opens from the UM690 keyboard
+- [ ] Large Ollama model unloaded during that session
 
-## Phase 5 — Portfolio polish (optional)
+## 05 — Nextcloud
 
-- [ ] Short per-service notes + compose in git (manual apply)
-- [ ] No GitHub Actions required
+- [ ] `joshua` admin, 50 GB
+- [ ] `member` standard, 50 GB
+- [ ] They cannot see each other’s files
+- [ ] Data directory only. No home-folder symlinks
 
-## Deferred (separate design later)
+## 06 — Backups
 
-- [ ] Homelab-wide start / stop / review procedures after all phases complete
+- [ ] Weekly `$DATE_bak.tar.gz` in node1 `~/Backups` (keep 4)
+- [ ] Monthly copy in `/srv/nas_a/backups/nextcloud` (keep 3)
+- [ ] One restored file matches
+- [ ] Quarterly script present
+
+## 07 — Assistant
+
+- [ ] `member` gets a drafted note in her files
+- [ ] Assistant has no SSH key
+
+## 08 — Minecraft
+
+- [ ] Two tailnet clients join the Paper lobby
+- [ ] At most two Paper servers running
+- [ ] Consoles outside the lab, and VyOS, untouched
+
+## 09 — Games
+
+- [ ] Massive Decks, two browsers
+- [ ] Bashcrawl login lands in `/home/bashcrawl`
+- [ ] One Batocera ROM plays in RetroAssembly
+- [ ] Patzer installed, or source still unnamed
+
+## 10 — Dashboard
+
+- [ ] One tailnet page links the live services
+
+## 11 — MVP
+
+- [ ] `phases/11-mvp/acceptance.md` all required lines pass

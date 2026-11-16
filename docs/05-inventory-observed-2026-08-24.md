@@ -1,6 +1,8 @@
 # Inventory snapshot — 2026-08-24
 
-Sources: live inspection from `um690`, plus operator-provided `sudo tailscale status` for both profiles.
+**Superseded** by [05-inventory-observed-2026-11-09.md](05-inventory-observed-2026-11-09.md). Personal and HickmaNet rows were removed from this page on 2026-11-09.
+
+Sources: live inspection from `um690` on that date.
 
 ## Lab LAN `192.168.20.0/24`
 
@@ -13,32 +15,15 @@ Sources: live inspection from `um690`, plus operator-provided `sudo tailscale st
 | .103 | node3 | Ubuntu fleet |
 | .109 | (display) | Consumer display; not a managed node |
 
-## Home LAN `192.168.10.0/24`
-
-| Address | Published name | Function |
-|---------|----------------|----------|
-| .1 | vyos-router | Home-side gateway |
-| .100 / .108 | Deco APs | TP-Link Deco X20 mesh (AP mode) |
-| .150 | um690 | Control seat Wi-Fi NIC |
-| others | omitted | Household, guest, and IoT clients |
-
 ## Lab Tailscale (destroythekraken@)
 
-Historical for this date: `um690`, `node1`, `node2`, `node3`, `operator-phone`, `operator-tablet` — all online.
-
-**Current lab Tailscale membership/status:** see [05-inventory-observed-2026-08-29.md](05-inventory-observed-2026-08-29.md).
-
-## Home Tailscale (joshua.hickman1@)
-
-Online: `um690`, `home-laptop-1`, `home-desktop-1`.  
-Offline: `home-desktop-2`, `home-phone-1`, `operator-phone`, `operator-tablet`, `field-android`.
+Lab hosts on that date: `um690`, `node1`, `node2`, `node3`. Later status is in [05-inventory-observed-2026-08-29.md](05-inventory-observed-2026-08-29.md).
 
 ## How to refresh
 
 ```bash
 tailscale status
-sudo tailscale switch --list
-# switch profile, print status, switch back
+# Stay on DestroyTheKraken. Do not record a personal tailnet in this repo.
 ```
 
 Sanitize with [00-redaction-policy.md](00-redaction-policy.md) before committing a new dated page. Never commit raw JSON.

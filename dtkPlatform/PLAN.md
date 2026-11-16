@@ -1,193 +1,88 @@
-# Plan: DestroyTheKraken Home Platform (multiphase install)
+# DTK Private Platform — MVP plan
 
-> **Org:** `~/Projects/HOME_LAB/dtkPlatform/` · buckets: AIDE / DTK / HOME_LAB (`~/Projects/README.md`).  
-> **This document is the multiphase project only.** Daily start/stop/review rituals, session coaching, and post-build ops UX are **out of scope** until you design them separately.
+**Updated:** 2026-11-15  
+**Status:** Phase 00 (planning) is written. Implementation starts in [`phases/01-access`](./phases/01-access).  
+**Scope:** household platform on LabNet and the DestroyTheKraken tailnet (`tail13a119.ts.net`). Not a customer product, and not the AIDE lesson UI.
 
-**Goal:** Shared family/friends home platform on LabNet — plug-and-play services, one phase at a time — portfolio practice for Net+ → LFCS. Not a product SKU.
+Detailed steps live in [`phases/`](./phases/README.md). One session works in one phase directory. When that phase’s exit checks pass, stop. The next session starts in the next directory.
 
-**Constraints:** solo · Tailscale Free ×2 · no Google group sync · no GitHub Actions to private hosts · GUI-first for non-LFCS work (Portainer / Tailscale admin / app UIs) · CLI reserved for deliberate LFCS drills.
+## Roles
 
----
+| Host | Role |
+|------|------|
+| **um690** `.100` | AI seat (Ollama + Open WebUI + Whisper), Kodi movie database, Steam Big Picture, NAS |
+| **node1** `.101` | Nextcloud. Weekly backups in that account’s `~/Backups` |
+| **node2** `.102` | Minecraft network: Paper + Geyser/Floodgate, plugins from Hangar |
+| **node3** `.103` | Massive Decks, Bashcrawl, Patzer, RetroAssembly |
+| **Other consoles** | Left alone. They are not given an address, a DNS change, or a port. |
+| **vyos-router** | Unchanged. No new WAN publish, DNAT, or UPnP |
 
-## 1. Done looks like (v1)
+UM690 stays Ubuntu 26.04.1 desktop. It is already that release. A Server reinstall is not part of this MVP. Steam and Kodi need the graphical session.
 
-| Surface | Job | Implementation |
-|---------|-----|----------------|
-| **Home** | Launch pad | Static HTML tiles → MagicDNS URLs |
-| **Watch** | Movies / TV | Jellyfin |
-| **Listen** | Music / radio | Same Jellyfin |
-| **Play** | Retro games | RetroArch (later phase) |
-| **Settings** | Accounts / basics | Nextcloud + simple status links (not a custom settings app) |
+Proxmox VE **is installed** on node1–node3 as cluster `dtk-cloud` (quorate, 0 guests, `pve-manager` 9.2.26). n1–n3 are Tailscale `tag:ops`. See [`PREP-proxmox.md`](./PREP-proxmox.md) and the 2026-11-15 inventory. Phase steps that still say “install on Ubuntu on the node” were written before that fact. Login is `root`.
 
-### Non-goals
+## Movie database
 
-- Ubuntu Core / Frame / WPE / custom QML appliance
-- Fathom / JellyEmu / Stremio stack from BraveResearch
-- k3s / Longhorn / Traefik on LabNet for family services
-- Customer installer / proprietary packaging
-- Google Workspace sync; full GitOps CI
-- Resurrecting hostname `fam-media` (chassis is **node3**)
-- Designing daily ops / start-stop / review methodology (deferred)
+Kodi is the only movie database. An earlier media-server project is historical and **invalid** for this platform. Do not install it, document it as a feature, or extend it. Phase 03 removes that old process after Kodi can play a file.
 
----
+Movie files live on the UM690 NAS at `/srv/nas_a/kodi/Movies`. One MariaDB on UM690 is the shared Kodi library so every Kodi client sees the same database. Clients reach the files and the database over the tailnet.
 
-## 2. Sources of truth (project)
+DVD ingest, when Joshua asks:
 
-| Priority | Path | Use |
-|----------|------|-----|
-| 1 | `AIDE/aideArchives/SovereignAid/ARCHITECTURE.md` | Live mesh facts |
-| 1 | `HOME_LAB/docs/` | Redacted network / Tailscale inventory |
-| 1 | `HOME_LAB/dtkPlatform/PLAN.md` | This phased plan |
-| 2 | `HOME_LAB/hickMedia/compose/jellyfin/` | Jellyfin compose template |
-| 2 | `HOME_LAB/installers/nc-lin-cs/` | Nextcloud installer option |
-| 2 | `HOME_LAB/installers/ssh-ufw-ts-install/` | SSH/UFW/Tailscale bootstrap pattern |
-| 3 | `Documents/BraveResearch/brave-research_mediaUI.md` | Idea scrapbook only |
+1. He inserts a disc.
+2. He says it is inserted and ready, and he gives the disc name.
+3. The session copies the disc, remuxes to MKV without re-encoding, names the folder from the name he gave, stores it under `/srv/nas_a/kodi/Movies`, and updates the Kodi library.
 
-Leaf GitHub remotes: see [`../../REPOS.md`](../../REPOS.md) (do not confuse local folders with remote names).
+## Minecraft capacity
 
----
+node2 is a ThinkCentre M93p: Core i5-4570T (2 cores / 4 threads), 15 GiB RAM, 238 GB SSD.
 
-## 3. Ground truth (LabNet)
+**Two Paper servers at once** is the confident cap. That means the lobby plus one minigame, with Geyser/Floodgate and a small proxy. People should be playing in one of those worlds. A third Paper world stays installed and **stopped**. Heavy Hangar minigame packs can pull the comfortable number down to one world with players. Four worlds online will not fit this machine.
 
-```
-Starlink CGNAT → VyOS → LabNET 192.168.20.0/24
-                         um690 .100  (joshua)  control / study seat
-                         node1 .101  (kraken)  → tag:media   (Jellyfin + Portainer)
-                         node2 .102  (kraken)  → tag:cloud   (Nextcloud)
-                         node3 .103  (kraken)  → tag:play    (RetroArch later)
-```
+## AI boundary
 
-| Fact | Detail |
-|------|--------|
-| Lab tailnet | `destroythekraken@` · `tail13a119.ts.net` |
-| Home tailnet | HickmaNet (`joshua.hickman1@`) — private; not family platform |
-| Today | SSH + Tailscale up; no app services on workers yet |
-| Nextcloud exception | Old Core appliance may sit on `taile52ad9.ts.net` — do not put mesh nodes there |
+| Level | When | Allowed |
+|-------|------|---------|
+| L0 | Phase 02 | Chat, drafts, Whisper inside Open WebUI, answers from attached files |
+| L1 | Phase 07 | Nextcloud Assistant writes inside the logged-in user’s files, through Open WebUI |
+| Later | Not this MVP | Read-only checks and a drafted command. Joshua runs the command |
+| Never | | Root shell written by the model, VyOS edits, firewall changes, creating users, restarting services |
 
-**Tenancy:** DTK tailnet = shared platform. Secrets-only-to-you stay on HickmaNet. Inside DTK: least privilege (apps yes, SSH/Portainer ops-only).
+Ollama stays on `127.0.0.1:11434`. Open WebUI is the only tailnet door to the model.
 
----
+## Backups (Nextcloud)
 
-## 4. Tooling (how phases execute — not daily ops)
+| Tier | Where | Keep | Name |
+|------|--------|------|------|
+| Weekly | node1 `~/Backups` | 4 | `$DATE_bak.tar.gz` |
+| Monthly | um690 `/srv/nas_a/backups/nextcloud` | 3 | `$DATE_bak.tar.gz` |
+| Quarterly | offline host named at the start of phase 06 | 3 | `$DATE_bak.tar.gz` |
 
-| Tool | Role in *this* project |
-|------|-------------------------|
-| **Docker Engine + Compose** | Required for Phase 1+ services |
-| **Portainer CE** | Default GUI to deploy/manage stacks on node1 |
-| **GitOps-lite** | Optional Phase 5: track compose in git; apply by hand (no Actions) |
-| **Kubernetes** | Not used for family platform; optional later Multipass study only |
+No home-folder symlinks into the Nextcloud data directory. One normal data directory on node1.
 
----
+## End of MVP
 
-## 5. Phase 0 — Access foundation
+Every service below is installed and answers on the tailnet. Preference screens and bulk file uploads come after that, except the ROM library, which is copied before the Batocera machine is wiped.
 
-**Deliverable:** DestroyTheKraken ACL grants + tags; workers firewalled sensibly.
+- Open WebUI chat and a Whisper dictation
+- Kodi opens the shared movie library; the DVD procedure is ready
+- Steam Big Picture launches after the large Ollama model is unloaded
+- Nextcloud users `joshua` (admin, 50 GB) and `member` (standard, 50 GB), isolated from each other
+- Weekly, monthly, and quarterly backup paths exist; one file has been restored
+- Nextcloud can draft a file for `member` through the local model
+- Paper lobby is joinable on the tailnet via Java and via Geyser; only two Paper servers run
+- Massive Decks, Bashcrawl, and RetroAssembly answer; Patzer is installed once its source is named
+- ROM files from the live Batocera machine play in RetroAssembly
+- One dashboard page links the services that are up
 
-- Confirm devices on `tail13a119.ts.net`
-- Grants (conceptual): `group:family` → `tag:media:8096` and cloud HTTP(S); `group:ops` → tagged servers `*`; Portainer `:9000`/`:9443` **ops-only**; SSH check-mode for ops only
-- Tags: node1 `tag:media`, node2 `tag:cloud`, node3 `tag:play`, um690 `tag:ops` (as roles land)
-- UFW: default deny; SSH; Tailscale; open service ports when installed
+## Out of this MVP
 
-**Exit:** Ops can SSH; family-like identity cannot SSH and cannot open Portainer.
-
-**Guide stub:** `Guides/tailscale-acl-grants.md` (click-path aid, not an ops system).
-
----
-
-## 6. Phase 1 — Watch + Listen (Jellyfin on node1)
-
-**Deliverable:** Jellyfin reachable at `http://node1.tail13a119.ts.net:8096` via Portainer stack.
-
-- Docker Engine on node1
-- Portainer CE (ops-only)
-- Stack from `Compose/jellyfin-compose.yml` (origin: `hickMedia/compose/jellyfin`)
-- Small `/srv/mediahub/media/{movies,tv,music}` test library
-- Per-user Jellyfin accounts (not shared admin)
-
-**Exit:** Phone on DTK streams a test video and plays a music folder.
-
-**Guide stub:** `Guides/portainer-on-node1.md`.
-
----
-
-## 7. Phase 2 — Home portal
-
-**Deliverable:** One static page with five tiles (Home destinations for Watch / Listen / Play / Settings / status).
-
-- Caddy/nginx or Tailscale Serve
-- No gamepad shell / starfield / Bridge product UI
-
-**Exit:** Family opens one Home URL and reaches Jellyfin.
-
----
-
-## 8. Phase 3 — Settings / files (Nextcloud)
-
-Pick **one**:
-
-| Option | When |
-|--------|------|
-| **A** Keep existing Nextcloud Core on `taile52ad9` | Already healthy |
-| **B** Fresh on node2 (`nc-lin-cs` or Docker/Portainer) on `tail13a119` | Prefer one tailnet |
-
-- Tailscale Serve HTTPS
-- Family accounts; Docs / Photos
-- Defer AI helpers until stable
-
-**Exit:** Photo upload on phone visible on another DTK device.
-
----
-
-## 9. Phase 4 — Play (RetroArch)
-
-- Seat: node3 HDMI or household PC on DTK
-- Flatpak/Ubuntu RetroArch; legal ROMs only
-- Link Play tile on Home
-
-**Exit:** One controller, one core, one game, documented once (a short note — not a full ops program).
-
----
-
-## 10. Phase 5 — Portfolio polish (optional)
-
-- Short per-service runbook snippets (start/stop/backup/invite) suitable for a résumé appendix
-- Commit compose + redacted notes; apply by hand (GitOps-lite)
-- Refresh `HOME_LAB/docs` inventory when roles change
-- Still no GitHub Actions required
-
-**Not included:** a Homelab-wide start/stop/review console, daily session system, or post-project ops methodology — design that later if you want it.
-
----
-
-## 11. Open forks
-
-| Fork | Default | Alternative |
-|------|---------|-------------|
-| Jellyfin host | node1 | um690 |
-| Docker GUI | Portainer CE | CLI-only (LFCS drill days) |
-| Nextcloud | node2 or keep Core appliance | um690 |
-| Play seat | defer; node3 later | household PC |
-| Media store | local `/srv/mediahub/media` first | NAS first |
-
----
-
-## 12. Implementation order
-
-1. Phase 0 — ACL + tags + UFW  
-2. Phase 1 — Docker + Portainer + Jellyfin  
-3. Phase 2 — Home portal  
-4. Phase 3 — Nextcloud  
-5. Phase 4 — RetroArch  
-6. Phase 5 — Polish / GitOps-lite (optional)  
-
-**Parallel (separate from this plan):** LFCS via `AIDE/aideTutor` + `aideOs`; k8s only in Multipass if/when you choose.
-
----
-
-## 13. Explicitly deferred (do not invent here)
-
-- Daily session coach / PlasmaLLM ritual  
-- Homelab-wide start · stop · review procedures after all phases complete  
-- Unified “ops dashboard” for every service  
-
-Those need their own design pass when you are ready. This plan stops at **building the phased platform**.
+- A second hypervisor install. Proxmox is already on node1–node3.
+- Prometheus and Grafana until they are created in the Proxmox UI
+- k3s, Ceph
+- Elgg
+- Changing how consoles outside the lab join a game
+- Opening the VyOS firewall
+- A public or customer image of this platform
+- MiniGame3 content until it has a name
+- Ripping discs unless Joshua prompts with the disc name

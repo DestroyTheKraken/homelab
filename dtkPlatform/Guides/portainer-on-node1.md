@@ -1,11 +1,13 @@
-# Guide — Portainer CE on node1 (Phase 1)
+# Guide — Portainer CE on node1 (historical)
+
+**Not current.** node1 is Proxmox node `n1` in cluster `dtk-cloud`. This page describes the old Ubuntu Docker path. Do not follow it against the hypervisor.
 
 **Lane:** Platform (GUI after one-time install)  
 **Official docs:** [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) · [Portainer CE install](https://docs.portainer.io/start/install-ce/server/docker/linux)
 
 ## Goal
 
-Ops-only Docker GUI on `node1` (`tag:media`) so you deploy Jellyfin as a stack without living in the CLI.
+Ops-only Docker GUI. Family does not get this UI. It is not the movie database. Kodi on um690 is the movie database.
 
 ## Preconditions
 
@@ -28,8 +30,7 @@ On **node1** (via SSH from um690 only if Docker is not installed yet):
 1. On um690 browser: `https://node1.tail13a119.ts.net:9443` (or `:9000` if you chose HTTP).
 2. Create the admin user (once).
 3. Select the local Docker environment.
-4. **Stacks** → **Add stack** → paste/`upload` from `Compose/jellyfin-compose.yml` when ready for Jellyfin.
-5. Use Portainer for start/stop/logs/volumes afterward.
+4. Use Portainer for start/stop/logs/volumes of stacks this platform actually installs (Nextcloud or games). Do not deploy the removed historical media-server compose.
 
 ## Optional YouTube query
 
@@ -37,7 +38,7 @@ On **node1** (via SSH from um690 only if Docker is not installed yet):
 
 ## Stop conditions
 
-- Installing Portainer on um690 “just because” when node1 is the media host → don’t (keep roles clear).
+- Installing Portainer on um690 when the stack belongs on a worker → don’t (keep roles clear). Kodi stays on um690. Nextcloud stays on node1.
 - Exposing Portainer to `group:family` → never.
 - Diving into k8s inside Portainer → out of scope.
 

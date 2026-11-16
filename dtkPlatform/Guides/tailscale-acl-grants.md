@@ -5,17 +5,17 @@
 
 ## Goal
 
-Replace open “everyone can talk” defaults with grants: family → Jellyfin only; ops → servers; Portainer ops-only.
+Ops (`group:ops`) may reach every device. Family (`group:family`) may reach only future service tags: `tag:media` TCP 8096, and `tag:cloud` TCP 80 and 443. Family is not granted SSH (22), the Proxmox UI (8006), `tag:play`, or `tag:monitor`. There is no open member-to-everything grant. Accepted 2026-11-15.
 
 ## Click-path
 
 1. Browser → [Tailscale admin](https://login.tailscale.com/admin) → sign in as `destroythekraken@…`.
-2. Confirm MagicDNS domain is **`tail13a119.ts.net`** (lab). Do not edit HickmaNet here.
+2. Confirm MagicDNS domain is **`tail13a119.ts.net`** (DestroyTheKraken). This guide does not cover any other tailnet.
 3. **Access controls** → open the policy editor.
-4. Paste the grants draft from `PLAN.md` §6.1 (start with `group:ops` = you only; leave `group:family` empty or commented until invites exist).
+4. Paste the policy from the operator session. Do not commit the live file: it names a family login, and this repo does not store that address.
 5. **Save**. Fix any syntax errors the UI reports.
-6. **Machines** → for `node1`, set tag `tag:media` (re-authenticate with tags if the UI requires it). Repeat later for `tag:cloud` / `tag:play` / `tag:ops` as those hosts get roles.
-7. From a second device (or after a family invite): confirm you can still reach your own devices; SSH to node1 only works for ops.
+6. n1–n3 are already `tag:ops`. Do not add `tag:media` or `tag:cloud` to the hypervisors. Those tags are for guests, later.
+7. From `um690`, `ssh node1` and `ssh node1-ts` should both log in as `root`.
 
 ## Optional YouTube query
 
@@ -36,5 +36,5 @@ Restore previous policy from Access controls version history / your last known-g
 ```bash
 tailscale status
 tailscale status --json | less
-# From um690: ssh kraken@node1   # should work for ops only after tags/SSH rules
+# From um690: ssh node1 && ssh node1-ts
 ```
